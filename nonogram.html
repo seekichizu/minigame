@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>노노그램 (Nonogram)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- 상단 네비게이션 -->
+  <nav class="top-nav">
+    <a href="index.html" class="home-btn">← 홈으로</a>
+  </nav>
+
+  <!-- 헤더 -->
+  <header>
+    <h1>노노그램</h1>
+    <p>가로·세로 힌트 숫자를 보고 칸을 채우세요.</p>
+  </header>
+
+  <!-- 컨트롤 바 -->
+  <div class="controls">
+    <div class="difficulty-group">
+      <button data-difficulty="easy"   class="active">쉬움 5×5</button>
+      <button data-difficulty="medium">보통 10×10</button>
+      <button data-difficulty="hard">어려움 15×15</button>
+    </div>
+    <button class="btn btn-primary" id="btn-new">새 게임</button>
+    <button class="btn" id="btn-hint">💡 힌트</button>
+    <button class="btn" id="btn-errors">오류 표시</button>
+  </div>
+
+  <!-- 스탯 바 -->
+  <div class="stats">
+    <div class="stat-pill">
+      <span class="icon">⏱</span>
+      <span class="value" id="timer-value">00:00</span>
+    </div>
+    <div class="stat-pill" id="mistakes-pill">
+      <span class="icon">✗</span>
+      <span class="value mistakes-value" id="mistakes-value">0</span>
+      <span style="color:var(--text-muted);font-size:0.78rem">실수</span>
+    </div>
+    <div class="stat-pill">
+      <span class="icon">💡</span>
+      <span class="value" id="hints-value">0</span>
+      <span style="color:var(--text-muted);font-size:0.78rem">힌트</span>
+    </div>
+    <button class="btn btn-icon" id="btn-sound" title="소리 켜기/끄기">🔊</button>
+  </div>
+
+  <!-- 게임 보드 -->
+  <div id="board-area">
+    <div id="board-wrapper">
+      <div id="board"></div>
+    </div>
+
+    <!-- 시작 오버레이 (보드 위에 표시) -->
+    <div id="start-overlay">
+      <div class="start-card">
+        <div class="start-icon">🧩</div>
+        <h2 id="start-title">쉬움 · 5×5</h2>
+        <p id="start-desc">퍼즐이 준비됐습니다</p>
+        <button class="btn btn-primary btn-start" id="btn-start">시작하기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 완성 배너 -->
+  <div id="complete-banner">
+    <h2>🎉 완성!</h2>
+    <div class="result-row">
+      <span>⏱ <strong id="final-time">--:--</strong></span>
+      <span>✗ 실수 <strong id="final-mistakes">0</strong>회</span>
+    </div>
+    <button class="btn btn-primary" onclick="newGame()">다음 퍼즐 →</button>
+  </div>
+
+  <!-- 로딩 오버레이 -->
+  <div id="loading" class="show">
+    <div class="spinner"></div>
+    <span>퍼즐 생성 중…</span>
+  </div>
+
+  <!-- 플레이 방법 -->
+  <details class="how-to-play">
+    <summary>플레이 방법</summary>
+    <ul>
+      <li><b>왼쪽 클릭</b> — 칸 채우기 / 취소</li>
+      <li><b>오른쪽 클릭</b> — × 표시 (빈칸 확정)</li>
+      <li><b>드래그</b> — 여러 칸 한 번에 채우기</li>
+      <li>행·열의 숫자는 연속으로 채워야 할 칸 수입니다.</li>
+      <li>숫자가 여러 개면 각 그룹 사이에 빈칸이 1개 이상 있어야 합니다.</li>
+    </ul>
+  </details>
+
+  <!-- 스크립트 -->
+  <script src="js/solver.js"></script>
+  <script src="js/generator.js"></script>
+  <script src="js/sound.js"></script>
+  <script src="js/game.js"></script>
+
+</body>
+</html>

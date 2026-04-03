@@ -570,6 +570,134 @@ header p {
 .how-to-play b { color: var(--text); font-weight: 600; }
 
 /* ──────────────────────────────────────────────
+   홈 화면
+────────────────────────────────────────────── */
+.home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.home-header h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+.home-header p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.game-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 520px;
+}
+
+.game-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 18px;
+  padding: 24px 24px 24px 20px;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+
+.game-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(108,99,255,0.2);
+  border-left-color: var(--accent-dark);
+}
+
+.game-card-icon {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+}
+
+.game-card-info {
+  flex: 1;
+}
+
+.game-card-info h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 5px;
+  color: var(--accent);
+}
+
+.game-card-info p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+}
+
+.game-card-tag {
+  font-size: 0.75rem;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.game-card-arrow {
+  font-size: 1.4rem;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* 상단 네비게이션 바 (게임 페이지) */
+.top-nav {
+  align-self: stretch;
+  margin: -32px -16px 32px;
+  padding: 12px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+}
+
+.home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  background: var(--accent-light);
+  color: var(--accent);
+  border-radius: 20px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+}
+
+.home-btn:hover {
+  background: var(--accent);
+  color: #ffffff;
+  transform: translateX(-2px);
+}
+
+/* ──────────────────────────────────────────────
    Mobile
 ────────────────────────────────────────────── */
 @media (max-width: 500px) {
