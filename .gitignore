@@ -5,5 +5,8 @@
 __pycache__/
 *.pyc
 
+# Claude Code 로컬 설정
+.claude/
+
 # 임시 파일
 /tmp/
