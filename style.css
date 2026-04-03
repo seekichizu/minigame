@@ -607,9 +607,7 @@ header p {
 }
 
 .game-card {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+  display: block;
   background: var(--surface);
   border: 1.5px solid var(--border);
   border-left: 4px solid var(--accent);
@@ -618,13 +616,18 @@ header p {
   text-decoration: none;
   color: var(--text);
   box-shadow: var(--shadow-lg);
-  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  transition: transform 0.15s, box-shadow 0.15s;
 }
 
 .game-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 40px rgba(108,99,255,0.2);
-  border-left-color: var(--accent-dark);
+}
+
+.game-card-inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .game-card-icon {
