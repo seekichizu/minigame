@@ -701,6 +701,170 @@ header p {
 }
 
 /* ──────────────────────────────────────────────
+   홈 화면 — 스도쿠 카드 (초록 테마)
+────────────────────────────────────────────── */
+.game-card-title-green { color: var(--success) !important; }
+.game-card-tag-green   { color: var(--success) !important; background: var(--success-light) !important; }
+.game-card-arrow-green { color: var(--success) !important; }
+
+a.game-card:has(.game-card-title-green) {
+  border-left-color: var(--success);
+}
+a.game-card:has(.game-card-title-green):hover {
+  box-shadow: 0 12px 40px rgba(16,185,129,0.18);
+  border-left-color: #059669;
+}
+
+/* ──────────────────────────────────────────────
+   스도쿠 — 로딩 & 오버레이 & 배너
+────────────────────────────────────────────── */
+#sdk-loading {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(240,242,248,0.88);
+  backdrop-filter: blur(6px);
+  z-index: 100;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+#sdk-loading.show { display: flex; }
+
+#sdk-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  background: rgba(240,242,248,0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+}
+#sdk-overlay.show { display: flex; }
+
+#sdk-banner {
+  display: none;
+  margin-top: 24px;
+  padding: 24px 32px;
+  background: var(--surface);
+  border: 1.5px solid var(--success);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  box-shadow: var(--shadow-lg), 0 0 0 4px var(--success-light);
+  animation: slideUp 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  min-width: 260px;
+}
+#sdk-banner.show { display: block; }
+#sdk-banner h2   { font-size: 1.5rem; font-weight: 700; color: var(--success); margin-bottom: 10px; }
+#sdk-banner .result-row {
+  display: flex; justify-content: center; gap: 24px;
+  margin-bottom: 18px; color: var(--text-muted); font-size: 0.88rem; font-weight: 500;
+}
+#sdk-banner .result-row strong { color: var(--text); font-weight: 700; }
+
+/* ──────────────────────────────────────────────
+   스도쿠 — 게임 영역
+────────────────────────────────────────────── */
+#sdk-game-area {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 그리드 */
+#sdk-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  border: 2px solid var(--clue);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  background: var(--surface);
+}
+
+/* 셀 */
+.sdk-cell {
+  width: clamp(34px, calc((100vw - 48px) / 9), 52px);
+  height: clamp(34px, calc((100vw - 48px) / 9), 52px);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--accent);
+  background: var(--cell-empty);
+  transition: background 0.08s;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.sdk-cell.given {
+  color: var(--text);
+  font-weight: 700;
+  background: var(--surface-2);
+}
+
+/* 3×3 박스 구분선 */
+.sdk-cell.box-top  { border-top: 2px solid var(--clue); }
+.sdk-cell.box-left { border-left: 2px solid var(--clue); }
+
+/* 상태 클래스 */
+.sdk-cell.selected    { background: rgba(108,99,255,0.18) !important; }
+.sdk-cell.highlighted { background: rgba(108,99,255,0.05); }
+.sdk-cell.same-num    { background: rgba(108,99,255,0.12); }
+.sdk-cell.conflict,
+.sdk-cell.wrong       { color: var(--danger) !important; background: var(--danger-light) !important; }
+.sdk-cell.hinted      { color: var(--success) !important; }
+
+/* 숫자 패드 */
+#sdk-numpad {
+  display: flex;
+  gap: 6px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sdk-num-btn,
+#sdk-btn-erase {
+  width: 46px;
+  height: 46px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s, border-color 0.1s, transform 0.08s;
+  box-shadow: var(--shadow-sm);
+  font-family: inherit;
+}
+
+.sdk-num-btn:hover,
+#sdk-btn-erase:hover {
+  background: var(--accent-light);
+  border-color: var(--accent);
+}
+
+.sdk-num-btn:active,
+#sdk-btn-erase:active { transform: scale(0.92); }
+
+/* ──────────────────────────────────────────────
    Mobile
 ────────────────────────────────────────────── */
 @media (max-width: 500px) {

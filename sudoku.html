@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>스도쿠</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- 상단 네비게이션 -->
+  <nav class="top-nav">
+    <a href="index.html" class="home-btn">← 홈으로</a>
+  </nav>
+
+  <!-- 헤더 -->
+  <header>
+    <h1>스도쿠</h1>
+    <p>빈 칸에 1~9를 채워 모든 행·열·박스를 완성하세요.</p>
+  </header>
+
+  <!-- 컨트롤 바 -->
+  <div class="controls">
+    <div class="difficulty-group">
+      <button data-sdk-diff="easy" class="active">쉬움</button>
+      <button data-sdk-diff="medium">보통</button>
+      <button data-sdk-diff="hard">어려움</button>
+    </div>
+    <button class="btn btn-primary" id="sdk-btn-new">새 게임</button>
+    <button class="btn" id="sdk-btn-hint">💡 힌트</button>
+    <button class="btn" id="sdk-btn-errors">오류 표시</button>
+  </div>
+
+  <!-- 스탯 바 -->
+  <div class="stats">
+    <div class="stat-pill">
+      <span class="icon">⏱</span>
+      <span class="value" id="sdk-timer-value">00:00</span>
+    </div>
+    <div class="stat-pill" id="sdk-mistakes-pill">
+      <span class="icon">✗</span>
+      <span class="value" id="sdk-mistakes-value">0</span>
+      <span style="color:var(--text-muted);font-size:0.78rem">실수</span>
+    </div>
+    <div class="stat-pill">
+      <span class="icon">💡</span>
+      <span class="value" id="sdk-hints-value">0</span>
+      <span style="color:var(--text-muted);font-size:0.78rem">힌트</span>
+    </div>
+    <button class="btn btn-icon" id="sdk-btn-sound" title="소리 켜기/끄기">🔊</button>
+  </div>
+
+  <!-- 게임 영역 -->
+  <div id="sdk-game-area">
+    <!-- 그리드 -->
+    <div id="sdk-grid"></div>
+
+    <!-- 숫자 패드 -->
+    <div id="sdk-numpad">
+      <button class="sdk-num-btn" data-num="1">1</button>
+      <button class="sdk-num-btn" data-num="2">2</button>
+      <button class="sdk-num-btn" data-num="3">3</button>
+      <button class="sdk-num-btn" data-num="4">4</button>
+      <button class="sdk-num-btn" data-num="5">5</button>
+      <button class="sdk-num-btn" data-num="6">6</button>
+      <button class="sdk-num-btn" data-num="7">7</button>
+      <button class="sdk-num-btn" data-num="8">8</button>
+      <button class="sdk-num-btn" data-num="9">9</button>
+      <button id="sdk-btn-erase" title="지우기">⌫</button>
+    </div>
+
+    <!-- 시작 오버레이 -->
+    <div id="sdk-overlay">
+      <div class="start-card">
+        <div class="start-icon">🔢</div>
+        <h2 id="sdk-overlay-title">쉬움</h2>
+        <p id="sdk-overlay-desc">퍼즐이 준비됐습니다</p>
+        <button class="btn btn-primary btn-start" id="sdk-btn-start">시작하기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 완성 배너 -->
+  <div id="sdk-banner">
+    <h2>🎉 완성!</h2>
+    <div class="result-row">
+      <span>⏱ <strong id="sdk-final-time">--:--</strong></span>
+      <span>✗ 실수 <strong id="sdk-final-mistakes">0</strong>회</span>
+    </div>
+    <button class="btn btn-primary" id="sdk-btn-next">다음 퍼즐 →</button>
+  </div>
+
+  <!-- 로딩 오버레이 -->
+  <div id="sdk-loading" class="show">
+    <div class="spinner"></div>
+    <span>퍼즐 생성 중…</span>
+  </div>
+
+  <!-- 플레이 방법 -->
+  <details class="how-to-play">
+    <summary>플레이 방법</summary>
+    <ul>
+      <li>셀을 클릭하고 1~9 숫자를 입력하세요.</li>
+      <li>각 행, 열, 3×3 박스에 1~9가 한 번씩만 들어가야 합니다.</li>
+      <li>키보드 방향키로 셀을 이동할 수 있습니다.</li>
+      <li>⌫ 버튼 또는 Backspace 키로 숫자를 지울 수 있습니다.</li>
+    </ul>
+  </details>
+
+  <!-- 스크립트 -->
+  <script src="js/sound.js"></script>
+  <script src="js/sudoku-solver.js"></script>
+  <script src="js/sudoku-generator.js"></script>
+  <script src="js/sudoku-game.js"></script>
+
+</body>
+</html>
